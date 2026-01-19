@@ -1,3 +1,4 @@
+
 import { WeeklyReport, AppUser, MonthlyTask, TaskCompletion, Notification, School, SchoolLog, SchoolPresident, PresidentWeeklyLog, KasifGroup, KasifGroupLog, NeighborhoodProfile, WomensReport } from '../types';
 
 const DB_KEY = 'agd_reports_v3';
@@ -17,6 +18,13 @@ const WOMENS_REPORTS_KEY = 'agd_womens_reports_v1';
 // Mock Users for Simulation (With Coordinates for Map)
 // Sultangazi Center: 41.1068, 28.8700
 export const MOCK_USERS: AppUser[] = [
+  // --- Admin & Unit Heads ---
+  { uid: 'a1', name: 'İlçe Yönetimi', email: 'admin@agd.com', role: 'admin' },
+  { uid: 't1', name: 'Teşkilat Başkanı', email: 'teskilat@agd.com', role: 'organization_president' }, 
+  { uid: 'l1', name: 'İlçe Liseler Bşk.', email: 'liseler@agd.com', role: 'district_high_school_admin' },
+  { uid: 'o1', name: 'İlçe Ortaokullar Bşk.', email: 'ortaokul@agd.com', role: 'district_middle_school_admin' },
+  { uid: 'wd1', name: 'İlçe Hanımlar Bşk.', email: 'ilce.hanim@agd.com', role: 'district_womens_president' },
+
   // --- Neighborhood Users (Mahalleler) ---
   { uid: 'u1', name: '50. Yıl Mahallesi', email: '50yil@agd.com', role: 'user', latitude: 41.1120, longitude: 28.8650 },
   { uid: 'u2', name: 'Uğur Mumcu Mahallesi', email: 'ugurmumcu@agd.com', role: 'user', latitude: 41.1085, longitude: 28.8730 },
@@ -30,19 +38,16 @@ export const MOCK_USERS: AppUser[] = [
   { uid: 'u10', name: 'Yayla Mahallesi', email: 'yayla@agd.com', role: 'user', latitude: 41.1300, longitude: 28.8500 },
   { uid: 'u11', name: 'Cumhuriyet Mahallesi', email: 'cumhuriyet@agd.com', role: 'user', latitude: 41.1050, longitude: 28.8600 },
 
-  // --- Admin & Unit Heads ---
-  { uid: 'a1', name: 'İlçe Yönetimi', email: 'admin@agd.com', role: 'admin' },
-  { uid: 't1', name: 'Teşkilat Başkanı', email: 'teskilat@agd.com', role: 'organization_president' }, 
-  { uid: 'l1', name: 'İlçe Liseler Bşk.', email: 'liseler@agd.com', role: 'district_high_school_admin' },
-  { uid: 'o1', name: 'İlçe Ortaokullar Bşk.', email: 'ortaokul@agd.com', role: 'district_middle_school_admin' },
-  
   // --- Sub-Unit Representatives (Mock) ---
-  { uid: 'p1', name: 'Ahmet Yılmaz (Bşk)', email: 'ahmet@okul.com', role: 'school_president' },
+  { uid: 'p1', name: 'Ahmet Yılmaz (Okul Bşk)', email: 'ahmet@okul.com', role: 'school_president' },
   { uid: 'w1', name: '50. Yıl Hanımlar', email: '50yil.hanim@agd.com', role: 'neighborhood_womens_rep' },
-  { uid: 'wd1', name: 'İlçe Hanımlar Bşk.', email: 'ilce.hanim@agd.com', role: 'district_womens_president' },
 ];
 
 // --- User Logic ---
+export const hasLoggedUser = (): boolean => {
+  return !!localStorage.getItem(USER_KEY);
+};
+
 export const getCurrentUser = (): AppUser => {
   const stored = localStorage.getItem(USER_KEY);
   return stored ? JSON.parse(stored) : MOCK_USERS[0]; 
@@ -50,6 +55,10 @@ export const getCurrentUser = (): AppUser => {
 
 export const setCurrentUser = (user: AppUser) => {
   localStorage.setItem(USER_KEY, JSON.stringify(user));
+};
+
+export const logoutUser = () => {
+  localStorage.removeItem(USER_KEY);
 };
 
 // --- Report Logic ---

@@ -1,6 +1,7 @@
+
 export type Role = 'admin' | 'user' | 'district_high_school_admin' | 'district_middle_school_admin' | 'school_president' | 'organization_president' | 'neighborhood_womens_rep' | 'district_womens_president';
 
-export type ViewState = 'home' | 'wizard' | 'list' | 'profile' | 'goals' | 'task-assignment' | 'school-list' | 'school-detail' | 'president-list' | 'president-detail' | 'middle-school-dashboard' | 'womens-report-wizard' | 'district-map';
+export type ViewState = 'login' | 'home' | 'wizard' | 'list' | 'profile' | 'goals' | 'task-assignment' | 'school-list' | 'school-detail' | 'president-list' | 'president-detail' | 'middle-school-dashboard' | 'womens-report-wizard' | 'district-map';
 
 export type TargetAudience = 'All' | 'Mens' | 'Womens';
 
